@@ -1,0 +1,6 @@
+RawData/
+packages/
+Canvasser/obj/
+Canvasser/bin/
+CanvasserTests/bin/
+CanvasserTests/obj/
