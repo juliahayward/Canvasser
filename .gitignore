@@ -4,3 +4,6 @@ Canvasser/obj/
 Canvasser/bin/
 CanvasserTests/bin/
 CanvasserTests/obj/
+TestResults/Canvasser.TE.Tests.mdf
+TestResults/
+Canvasser/Readme.txt
