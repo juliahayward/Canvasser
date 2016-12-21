@@ -23,7 +23,9 @@ namespace Canvasser.Schema
             if (currentVersion < 4) UpgradeTo4();
             if (currentVersion < 5) UpgradeTo5();
             if (currentVersion < 6) UpgradeTo6();
-            SetVersion(6);
+            if (currentVersion < 7) UpgradeTo7();
+            if (currentVersion < 8) UpgradeTo8();
+            SetVersion(8);
         }
 
         public int GetVersion()
@@ -134,6 +136,18 @@ ImprintAddress NVARCHAR(100) NOT NULL
             sql = @"INSERT INTO PollingDistrict VALUES ('ET', 'Loves Farm', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
             _context.ExecuteCommand(sql);
 
+        }
+
+        private void UpgradeTo7()
+        {
+            var sql = @"ALTER TABLE TargetVoter ADD Id INT IDENTITY(1,1) NOT NULL PRIMARY KEY";
+            _context.ExecuteCommand(sql);
+        }
+
+        private void UpgradeTo8()
+        {
+            var sql = @"ALTER TABLE Elector ADD Postcode NVarChar(8) NULL";
+            _context.ExecuteCommand(sql);
         }
 
         private void AddPhoneFieldIfNotPresent()
