@@ -60,6 +60,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ExcelNumberListReaderTests.cs" />
+    <Compile Include="FileUploadTests.cs" />
     <Compile Include="StringExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,8 +74,10 @@
     <Content Include="Test Data\TestNumberList.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Test.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Choose>
