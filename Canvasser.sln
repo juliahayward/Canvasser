@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Canvasser", "Canvasser\Canv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanvasserTests", "CanvasserTests\CanvasserTests.csproj", "{DD172053-42E5-4D4A-9359-ACF46E0D150A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CanvasserWebService", "CanvasserWebService\CanvasserWebService.csproj", "{EDC578B2-E27A-42E1-887A-0A62A2DA5890}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{DD172053-42E5-4D4A-9359-ACF46E0D150A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD172053-42E5-4D4A-9359-ACF46E0D150A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD172053-42E5-4D4A-9359-ACF46E0D150A}.Release|x86.ActiveCfg = Release|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EDC578B2-E27A-42E1-887A-0A62A2DA5890}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

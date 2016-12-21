@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Data">
+  <DataContextMoniker Name="/CanvasserDataContext" />
+  <nestedChildShapes>
+    <classShape Id="c180b0fe-a9ba-4bfe-a2b7-b2d35c502400" absoluteBounds="0.5, 0.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/CanvasserDataContext/Party" />
+      <nestedChildShapes>
+        <elementListCompartment Id="74d3a967-c88e-4dcd-a792-86631f91eb35" absoluteBounds="0.515, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4f8d0e07-38ca-4375-898c-5b1f7ed75086" absoluteBounds="2.625, 0.5, 2.375, 6.7707340494791657">
+      <DataClassMoniker Name="/CanvasserDataContext/Elector" />
+      <nestedChildShapes>
+        <elementListCompartment Id="04cc303f-aa04-43a9-8314-454dd8c7ffea" absoluteBounds="2.64, 0.96, 2.3449999999999998, 6.2107340494791661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

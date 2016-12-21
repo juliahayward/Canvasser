@@ -55,10 +55,12 @@
       <Column Name="Voted2015Bye" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Postal2016" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Intention2016" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Postcode" Type="System.String" DbType="NVarChar(8)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="TargetVoter" Member="TargetVoters">
     <Type Name="TargetVoter">
+      <Column Name="Id" Type="System.Int32" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PD" Type="System.String" DbType="NVarChar(2)" CanBeNull="false" />
       <Column Name="PN" Type="System.Int16" DbType="smallint" CanBeNull="false" />
       <Column Name="PNs" Type="System.Int16" DbType="smallint" CanBeNull="false" />
