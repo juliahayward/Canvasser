@@ -1,4 +1,4 @@
-﻿using Canvasser.Schema;
+using Canvasser.Schema;
 using Excel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

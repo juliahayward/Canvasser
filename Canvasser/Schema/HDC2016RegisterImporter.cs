@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Windows.Threading;
 namespace Canvasser.Schema
 {
     /// <summary>
-    /// Imports a CSV file of the form ER,123,1 containing people who votes in 2015 by-election.
+    /// Imports a CSV register file as supplied by HDC
     /// </summary>
     public class HDC2016RegisterImporter
     {
@@ -47,6 +47,7 @@ namespace Canvasser.Schema
                     elector.Markers = entry.Markers;
                     elector.FirstName = entry.Forename;
                     elector.Address2 = entry.Address2;
+                    elector.Postcode = entry.Postcode;
                     elector.Surname = entry.Surname; // Hack for 2016 - take trimmed camel case from register as it was uppercase last time
                     existingEntry++;
                 }
@@ -61,6 +62,7 @@ namespace Canvasser.Schema
                         Surname = entry.Surname,
                         Address = entry.Address1,
                         Address2 = entry.Address2,
+                        Postcode = entry.Postcode,
                         Markers = entry.Markers,
                         Date = entry.DoB,
                         Intention2012 = "",

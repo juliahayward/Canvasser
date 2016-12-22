@@ -1,0 +1,317 @@
+﻿<Window x:Class="Canvasser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Canvasser"
+        xmlns:local="clr-namespace:Canvasser"
+        Title="Canvasser 2015" Height="600" Width="1020"
+        x:Name="Window"
+        Icon="Images/spade.gif"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.Resources>
+            <local:VotedToForegroundConverter x:Key="VotedToForegroundConverter" />
+        </Grid.Resources>
+        <StackPanel Orientation="Vertical">
+        <TabControl HorizontalAlignment="Left" Margin="12,12,0,0" Name="tabControl1" VerticalAlignment="Top" Height="530" Width="984" SelectionChanged="tabControl1_SelectionChanged">
+            <TabItem Header="Electors">
+                <StackPanel Orientation="Horizontal">
+                        <DataGrid AutoGenerateColumns="False" Height="480" Width="824" HorizontalAlignment="Left" Margin="4,4,4,4" 
+                                  Name="dgElectors" VerticalAlignment="Top" SelectionMode="Extended" 
+                                  CurrentCellChanged="dgElectors_CurrentCellChanged" KeyDown="dgElectors_KeyDown">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="22" Header="" Binding="{Binding Path=PD}" />
+                                <DataGridTextColumn Width="44" Header="" Binding="{Binding Path=FullPN}" />
+                                <DataGridTextColumn Width="90" Header="First Name" Binding="{Binding Path=FirstName, Mode=TwoWay}" />
+                                <DataGridTextColumn Width="90" Header="Surname" Binding="{Binding Path=Surname}" />
+                                <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Path=Address}" />
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="12" 
+                                                        Binding="{Binding Path=Voted2012, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2012}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="13" 
+                                                        Binding="{Binding Path=Voted2013, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2013}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="14" 
+                                                        Binding="{Binding Path=Voted2014, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2014}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="15" 
+                                                        Binding="{Binding Path=Voted2015, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2015}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="Bye" 
+                                                        Binding="{Binding Path=Voted2015Bye, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2015}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="56" Header="Postal16" 
+                                                        Binding="{Binding Path=Postal2016, Mode=TwoWay}" />
+                                <DataGridComboBoxColumn Width="60" Header="2016"
+                                                        SelectedItemBinding="{Binding Path=Intention2016, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <DataGridComboBoxColumn.ElementStyle>
+                                        <Style TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Intentions}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.ElementStyle>
+                                    <DataGridComboBoxColumn.EditingElementStyle>
+                                        <Style TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Intentions}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.EditingElementStyle>
+                                </DataGridComboBoxColumn>
+                                <DataGridTextColumn Width="80"  
+                                    Header="Phone" Binding="{Binding Path=Telephone}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                    <DataGridTextColumn.EditingElementStyle>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                            <Setter Property="AcceptsReturn" Value="true" />
+                                        </Style>
+                                    </DataGridTextColumn.EditingElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="240"  
+                                    Header="Notes" Binding="{Binding Path=Notes}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                    <DataGridTextColumn.EditingElementStyle>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                            <Setter Property="AcceptsReturn" Value="true" />
+                                        </Style>
+                                    </DataGridTextColumn.EditingElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Vertical">
+                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center">Data</TextBlock>
+                            </Border>
+                            <Button Margin="4,4,4,4" Width="132" Click="save_Click">Save Changes</Button>
+                            <Border Margin="4,4,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center">Filters</TextBlock>
+                            </Border>
+                            <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="pdFilter_SelectionChanged">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Tag="" IsSelected="True">All polling districts</ComboBoxItem>
+                                    <ComboBoxItem Tag="ER">ER (Jubilee)</ComboBoxItem>
+                                    <ComboBoxItem Tag="ES">ES (Bushmead)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EN">EN (Scout Hut)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EP">EP (Eatons Ctr)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EF">EF (Methodists)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EG">EG (Wintringham Rd)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EH">EH (Ernulf)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EJ">EJ (Town/North, Almond Road)</ComboBoxItem>
+                                    <ComboBoxItem Tag="EL">EL (The Birds, Almond Road)</ComboBoxItem>
+                                    <ComboBoxItem Tag="ET">ET (Loves Farm)</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                            <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="voteFilter_SelectionChanged">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Tag="" IsSelected="True">All statuses</ComboBoxItem>
+                                    <ComboBoxItem Tag="Voted2015">Voted at p/s</ComboBoxItem>
+                                    <ComboBoxItem Tag="Postal2016">Has Postal</ComboBoxItem>
+                                    <ComboBoxItem Tag="NoPostal2016">NOT Postal</ComboBoxItem>
+                                    <ComboBoxItem Tag="Both2015">Voted at p/s AND Postal</ComboBoxItem>
+                                    <ComboBoxItem Tag="New2016">New in 2016</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                            <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="intFilter_SelectionChanged">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Tag="" IsSelected="True">All intentions</ComboBoxItem>
+                                    <ComboBoxItem Tag="D,P">Derek</ComboBoxItem>
+                                    <ComboBoxItem Tag="CON,Soft CON">Con</ComboBoxItem>
+                                    <ComboBoxItem Tag="NOT:CON,Soft CON,ANTI,NV">NOT Con</ComboBoxItem>
+                                    <ComboBoxItem Tag="LAB,Soft LAB">Lab</ComboBoxItem>
+                                    <ComboBoxItem Tag="LIBDEM,Soft LIBDEM">Lib Dem</ComboBoxItem>
+                                    <ComboBoxItem Tag="UKIP">UKIP</ComboBoxItem>
+                                    <ComboBoxItem Tag="GREEN">Green</ComboBoxItem>
+                                    <ComboBoxItem Tag="ANTI,NV">Anti/NV</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                            <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="gFilter_SelectionChanged">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Tag="" IsSelected="True">All nationalities</ComboBoxItem>
+                                    <ComboBoxItem Tag="non-G">UK only</ComboBoxItem>
+                                    <ComboBoxItem Tag="G">EU only (flags G,K)</ComboBoxItem>
+                                </ComboBox.Items>
+                            </ComboBox>
+                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center">Search</TextBlock>
+                            </Border>
+                            <TextBox Margin="0,4,0,0" Width="132" TextChanged="TextBox_TextChanged"></TextBox>
+                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center">Printing</TextBlock>
+                            </Border>
+                            <Button Margin="4,4,4,4" Width="132" Click="print_Click">Print All In Table</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="export_Click">Export All In Table</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="printSelected_Click">Print Selected</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="exportSelected_Click">Export Selected</Button>
+                            <CheckBox Margin="4,4,4,4" Width="132" x:Name="printHouseholds">Print/Export 1 per household</CheckBox>
+                            <Button Margin="4,4,4,4" Width="132" Click="knockUpList_Click">Create Knockup List</Button>
+                        </StackPanel>
+                </StackPanel>
+            </TabItem>
+                <TabItem Header="Statistics">
+                    <StackPanel Orientation="Horizontal">
+                        <DataGrid AutoGenerateColumns="False" Height="480" Width="700" HorizontalAlignment="Left" Margin="4,4,4,4" 
+                                  Name="dgStatistics" VerticalAlignment="Top" SelectionMode="Extended">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="100" Header="" Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn Width="80" Header="Total canvassed" Binding="{Binding Path=Total}" />
+                                <DataGridTextColumn Width="70" Header="Derek" Binding="{Binding Path=DerekS}" />
+                                <DataGridTextColumn Width="70" Header="Con" Binding="{Binding Path=ConS}" />
+                                <DataGridTextColumn Width="70" Header="Lab" Binding="{Binding Path=LabS}" />
+                                <DataGridTextColumn Width="70" Header="Libdem" Binding="{Binding Path=LibdemS}" />
+                                <DataGridTextColumn Width="70" Header="Ukip" Binding="{Binding Path=UkipS}" />
+                                <DataGridTextColumn Width="70" Header="Green" Binding="{Binding Path=GreenS}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel Orientation="Vertical">
+                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center">Printing</TextBlock>
+                            </Border>
+                            <Button Margin="4,4,4,4" Width="132" Click="printStats_Click">Print Statistics</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Parties" Name="tabItem1">
+                <StackPanel Orientation="Horizontal">
+                    <DataGrid AutoGenerateColumns="True" Height="226" HorizontalAlignment="Left" Margin="4,4,4,4" Name="dataGrid1" VerticalAlignment="Top" Width="427" />
+                    <StackPanel Orientation="Vertical">
+                        <Button Click="addParty_Click">Add</Button>
+                        <Button Click="deleteParty_Click">Delete</Button>
+                        <Button Click="saveParty_Click">Save</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+                <TabItem Header="Polling Districts">
+                    <StackPanel Orientation="Horizontal">
+                        <DataGrid AutoGenerateColumns="True" Height="480" HorizontalAlignment="Left" Margin="4,4,4,4" ItemsSource="{Binding Districts}" VerticalAlignment="Top" Width="824" />
+                        <StackPanel Orientation="Vertical">
+                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center">Data</TextBlock>
+                            </Border>
+                            <Button Margin="4,4,4,4" Width="132" Click="savePDs_Click">Save Changes</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Data">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Width="144">
+                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
+                                <TextBlock Width="132" TextAlignment="Center" x:Name ="schemaVersionLabel" Text=""/>
+                            </Border>
+                            <Button Margin="4,4,4,4" Width="132" Click="upgrade_Click">Upgrade</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="import2015Voted_Click">Import 2015 Voted</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="import2015BVoted_Click">Import Bye Voted</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="importNewRegister_Click">Import new Register</Button>
+                            <Button Margin="4,4,4,4" Width="132" Click="sendDataHome_Click">Send Data Back</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Polling Day">
+                    <StackPanel Orientation="Vertical">
+                        <ComboBox Margin="0,4,0,0" Width="160"  SelectionChanged="kuDayFilter_SelectionChanged">
+                            <ComboBox.Items>
+                                <ComboBoxItem Tag="ER" IsSelected="True">ER (Jubilee)</ComboBoxItem>
+                                <ComboBoxItem Tag="ES">ES (Bushmead)</ComboBoxItem>
+                                <ComboBoxItem Tag="EN">EN (Scout Hut)</ComboBoxItem>
+                                <ComboBoxItem Tag="EP">EP (Eatons Ctr)</ComboBoxItem>
+                                <ComboBoxItem Tag="EF">EF (Methodists)</ComboBoxItem>
+                                <ComboBoxItem Tag="EG">EG (Wintringham Rd)</ComboBoxItem>
+                                <ComboBoxItem Tag="EH">EH (Ernulf)</ComboBoxItem>
+                                <ComboBoxItem Tag="EJ">EJ (Town/North, Almond Road)</ComboBoxItem>
+                                <ComboBoxItem Tag="EL">EL (The Birds, Almond Road)</ComboBoxItem>
+                                <ComboBoxItem Tag="ET">ET (Loves Farm)</ComboBoxItem>
+                            </ComboBox.Items>
+                        </ComboBox>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Margin="4,4,4,4" BorderBrush="Black" BorderThickness="1">
+                                <StackPanel Orientation="Vertical" Width="120" Height="120">
+                                    <TextBlock TextAlignment="Center" FontSize="18">District</TextBlock>
+                                    <TextBlock TextAlignment="Center" FontSize="48" Text="{Binding TargetPD}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Border Margin="4,4,4,4" BorderBrush="Black" BorderThickness="1">
+                            <StackPanel Orientation="Vertical" Width="120" Height="120">
+                                    <TextBlock TextAlignment="Center" FontSize="18">Ds and Ps</TextBlock>
+                                    <TextBlock TextAlignment="Center" FontSize="48" Text="{Binding TargetCount}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Border Margin="4,4,4,4" BorderBrush="Black" BorderThickness="1">
+                                <StackPanel Orientation="Vertical" Width="120" Height="120">
+                                    <TextBlock TextAlignment="Center" FontSize="18">Voted</TextBlock>
+                                    <TextBlock TextAlignment="Center" FontSize="48" Text="{Binding TargetVoted}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                            <Border Margin="4,4,4,4" BorderBrush="Black" BorderThickness="1">
+                                <StackPanel Orientation="Vertical" Width="120" Height="120">
+                                    <TextBlock TextAlignment="Center" FontSize="18">Voted</TextBlock>
+                                    <TextBlock TextAlignment="Center" FontSize="48" Text="{Binding TargetVotedPerc}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>Enter teller's numbers:</TextBlock>
+                            <TextBox Width="80" Text="{Binding NextNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Enter" Command="{Binding TellerNumberCommand}"/>
+                                    <KeyBinding Key="Return" Command="{Binding TellerNumberCommand}"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
+                            <Button Command="{Binding PrintKnockUpListCommand}" >Print Knockup List</Button>
+                        </StackPanel>
+                        <DataGrid AutoGenerateColumns="False" Height="300" Width="624" HorizontalAlignment="Left" Margin="4,4,4,4" 
+                                  VerticalAlignment="Top" SelectionMode="Extended" 
+                                  ItemsSource="{Binding FilteredTargetVoters}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="22" Header="" Binding="{Binding Path=PD}" />
+                                <DataGridTextColumn Width="44" Header="" Binding="{Binding Path=PN}" />
+                                <DataGridTextColumn Width="22" Header="" Binding="{Binding Path=PNs}" />
+                                <DataGridTextColumn Width="90" Header="First Name" Binding="{Binding Path=FirstName, Mode=TwoWay}" />
+                                <DataGridTextColumn Width="90" Header="Surname" Binding="{Binding Path=Surname}" />
+                                <DataGridTextColumn Width="150" Header="Address" Binding="{Binding Path=Address}"  />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Help">
+                    <WebBrowser Width="964" Height="500" Source="http://apps.juliahayward.com/Canvasser/help.html">
+                    </WebBrowser>
+                </TabItem>
+            </TabControl>
+            <StatusBar>
+                <StatusBarItem>
+                    <TextBlock x:Name="status">Ready</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+        </StackPanel>
+    </Grid>
+</Window>

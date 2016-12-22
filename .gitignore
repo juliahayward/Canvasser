@@ -7,3 +7,7 @@ CanvasserTests/obj/
 TestResults/Canvasser.TE.Tests.mdf
 TestResults/
 Canvasser/Readme.txt
+Canvasser/Data.sdf
+CanvasserWebService/obj/
+CanvasserWebService/bin/
+CanvasserWebService/Received/test.txt
