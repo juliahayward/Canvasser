@@ -79,7 +79,7 @@ namespace Canvasser
                 if (!JuliaEnvironment.CurrentEnvironment.IsDebug())
                 {
                     // If Derek's machine, upgrade automatically. Must be done *after*
-                    // initialiseCpomponent so that we can update the UI
+                    // initialiseComponent so that we can update the UI
                     upgrade_Click(null, null);
                 }
 
@@ -265,7 +265,7 @@ namespace Canvasser
             else if (tag == "Both2015")
                 _votePredicate = (x => (x.Postal2015.Value || x.Voted2015.Value));
             else if (tag == "New2016")
-                _votePredicate = (x => string.IsNullOrEmpty(x.PD2015));
+                _votePredicate = (x => string.IsNullOrEmpty(x.PDPrevious));
             dgElectors.ItemsSource = FilteredElectors;
         }
 
@@ -320,7 +320,7 @@ namespace Canvasser
                 electors.Add(obj as Elector);
 
             var sortedElectors = electors
-                .OrderBy(x => x.PD2015).ThenBy(x => x.PN2015).ThenBy(x => x.PNs2015);
+                .OrderBy(x => x.PD).ThenBy(x => x.PN).ThenBy(x => x.PNs);
 
             MessageBox.Show("Printing " + electors.Count() + " people");
 

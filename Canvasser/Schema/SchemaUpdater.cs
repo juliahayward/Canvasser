@@ -146,8 +146,32 @@ ImprintAddress NVARCHAR(100) NOT NULL
 
         private void UpgradeTo8()
         {
-            var sql = @"ALTER TABLE Elector ADD Postcode NVarChar(8) NULL";
+            foreach (var sql in new [] {
+                // Add postcode column - will be filled by 2017 loader
+                @"ALTER TABLE Elector ADD Postcode NVarChar(8) NULL",
+                 // Remove unwanted old columns
+                @"ALTER TABLE Elector DROP COLUMN PD2012",
+                @"ALTER TABLE Elector DROP COLUMN PN2012",
+                @"ALTER TABLE Elector DROP COLUMN PNs2012",
+                @"ALTER TABLE Elector DROP COLUMN PD2013",
+                @"ALTER TABLE Elector DROP COLUMN PN2013",
+                @"ALTER TABLE Elector DROP COLUMN PNs2013",
+                @"ALTER TABLE Elector DROP COLUMN PD2014",
+                @"ALTER TABLE Elector DROP COLUMN PN2014",
+                @"ALTER TABLE Elector DROP COLUMN PNs2014",
+                @"ALTER TABLE Elector ADD PDPrevious NVARCHAR(2)",
+                @"UPDATE Elector SET PDPrevious = PD2015",
+                @"ALTER TABLE Elector DROP COLUMN PD2015",
+                @"ALTER TABLE Elector ADD PNPrevious SMALLINT",
+                @"UPDATE Elector SET PNPrevious = PN2015",
+                @"ALTER TABLE Elector DROP COLUMN PN2015",
+                @"ALTER TABLE Elector ADD PNsPrevious SMALLINT",
+                @"UPDATE Elector SET PNsPrevious = PNs2015",
+                @"ALTER TABLE Elector DROP COLUMN PNs2015",
+                })
+            { 
             _context.ExecuteCommand(sql);
+            }
         }
 
         private void AddPhoneFieldIfNotPresent()

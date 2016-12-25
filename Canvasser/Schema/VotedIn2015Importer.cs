@@ -30,9 +30,9 @@ namespace Canvasser.Schema
             foreach (var number in numbers)
             {
                 var elector = _context.Electors.FirstOrDefault(x =>
-                     (x.PD2015 == number.PD
-                     && x.PN2015 == number.PN
-                     && x.PNs2015 == number.PNs));
+                     (x.PD == number.PD
+                     && x.PN == number.PN
+                     && x.PN == number.PNs));
 
                 if (elector == null)
                 {

@@ -351,10 +351,6 @@ namespace Canvasser
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _PD2012;
-		
-		private System.Nullable<short> _PN2012;
-		
 		private string _FirstName;
 		
 		private string _Surname;
@@ -371,43 +367,23 @@ namespace Canvasser
 		
 		private System.Nullable<bool> _Voted2012;
 		
-		private string _PD2013;
-		
-		private System.Nullable<short> _PN2013;
-		
 		private System.Nullable<bool> _Postal2013;
 		
 		private string _Intention2013;
 		
 		private string _Markers;
 		
-		private short _PNs2012;
-		
-		private short _PNs2013;
-		
 		private string _Notes;
 		
 		private System.Nullable<bool> _Voted2013;
-		
-		private string _PD2014;
-		
-		private System.Nullable<short> _PN2014;
 		
 		private System.Nullable<bool> _Postal2014;
 		
 		private string _Intention2014;
 		
-		private System.Nullable<short> _PNs2014;
-		
 		private string _Address2;
 		
 		private System.Nullable<bool> _Voted2014;
-		
-		private string _PD2015;
-		
-		private System.Nullable<short> _PN2015;
-		
-		private System.Nullable<short> _PNs2015;
 		
 		private System.Nullable<bool> _Postal2015;
 		
@@ -420,6 +396,12 @@ namespace Canvasser
 		private System.Nullable<short> _PN;
 		
 		private System.Nullable<short> _PNs;
+		
+		private string _PDPrevious;
+		
+		private System.Nullable<short> _PNPrevious;
+		
+		private System.Nullable<short> _PNsPrevious;
 		
 		private System.Nullable<bool> _Voted2015;
 		
@@ -435,10 +417,6 @@ namespace Canvasser
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPD2012Changing(string value);
-    partial void OnPD2012Changed();
-    partial void OnPN2012Changing(System.Nullable<short> value);
-    partial void OnPN2012Changed();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
     partial void OnSurnameChanging(string value);
@@ -455,44 +433,24 @@ namespace Canvasser
     partial void OnElectorIdChanged();
     partial void OnVoted2012Changing(System.Nullable<bool> value);
     partial void OnVoted2012Changed();
-    partial void OnPD2013Changing(string value);
-    partial void OnPD2013Changed();
-    partial void OnPN2013Changing(System.Nullable<short> value);
-    partial void OnPN2013Changed();
     partial void OnPostal2013Changing(System.Nullable<bool> value);
     partial void OnPostal2013Changed();
     partial void OnIntention2013Changing(string value);
     partial void OnIntention2013Changed();
     partial void OnMarkersChanging(string value);
     partial void OnMarkersChanged();
-    partial void OnPNs2012Changing(short value);
-    partial void OnPNs2012Changed();
-    partial void OnPNs2013Changing(short value);
-    partial void OnPNs2013Changed();
     partial void OnNotesChanging(string value);
     partial void OnNotesChanged();
     partial void OnVoted2013Changing(System.Nullable<bool> value);
     partial void OnVoted2013Changed();
-    partial void OnPD2014Changing(string value);
-    partial void OnPD2014Changed();
-    partial void OnPN2014Changing(System.Nullable<short> value);
-    partial void OnPN2014Changed();
     partial void OnPostal2014Changing(System.Nullable<bool> value);
     partial void OnPostal2014Changed();
     partial void OnIntention2014Changing(string value);
     partial void OnIntention2014Changed();
-    partial void OnPNs2014Changing(System.Nullable<short> value);
-    partial void OnPNs2014Changed();
     partial void OnAddress2Changing(string value);
     partial void OnAddress2Changed();
     partial void OnVoted2014Changing(System.Nullable<bool> value);
     partial void OnVoted2014Changed();
-    partial void OnPD2015Changing(string value);
-    partial void OnPD2015Changed();
-    partial void OnPN2015Changing(System.Nullable<short> value);
-    partial void OnPN2015Changed();
-    partial void OnPNs2015Changing(System.Nullable<short> value);
-    partial void OnPNs2015Changed();
     partial void OnPostal2015Changing(System.Nullable<bool> value);
     partial void OnPostal2015Changed();
     partial void OnIntention2015Changing(string value);
@@ -505,6 +463,12 @@ namespace Canvasser
     partial void OnPNChanged();
     partial void OnPNsChanging(System.Nullable<short> value);
     partial void OnPNsChanged();
+    partial void OnPDPreviousChanging(string value);
+    partial void OnPDPreviousChanged();
+    partial void OnPNPreviousChanging(System.Nullable<short> value);
+    partial void OnPNPreviousChanged();
+    partial void OnPNsPreviousChanging(System.Nullable<short> value);
+    partial void OnPNsPreviousChanged();
     partial void OnVoted2015Changing(System.Nullable<bool> value);
     partial void OnVoted2015Changed();
     partial void OnVoted2015ByeChanging(System.Nullable<bool> value);
@@ -520,46 +484,6 @@ namespace Canvasser
 		public Elector()
 		{
 			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PD2012", DbType="NVarChar(2)", UpdateCheck=UpdateCheck.Never)]
-		public string PD2012
-		{
-			get
-			{
-				return this._PD2012;
-			}
-			set
-			{
-				if ((this._PD2012 != value))
-				{
-					this.OnPD2012Changing(value);
-					this.SendPropertyChanging();
-					this._PD2012 = value;
-					this.SendPropertyChanged("PD2012");
-					this.OnPD2012Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PN2012", DbType="smallint", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<short> PN2012
-		{
-			get
-			{
-				return this._PN2012;
-			}
-			set
-			{
-				if ((this._PN2012 != value))
-				{
-					this.OnPN2012Changing(value);
-					this.SendPropertyChanging();
-					this._PN2012 = value;
-					this.SendPropertyChanged("PN2012");
-					this.OnPN2012Changed();
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="NVarChar(100)", UpdateCheck=UpdateCheck.Never)]
@@ -722,46 +646,6 @@ namespace Canvasser
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PD2013", DbType="NVarChar(2)", UpdateCheck=UpdateCheck.Never)]
-		public string PD2013
-		{
-			get
-			{
-				return this._PD2013;
-			}
-			set
-			{
-				if ((this._PD2013 != value))
-				{
-					this.OnPD2013Changing(value);
-					this.SendPropertyChanging();
-					this._PD2013 = value;
-					this.SendPropertyChanged("PD2013");
-					this.OnPD2013Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PN2013", DbType="smallint", UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<short> PN2013
-		{
-			get
-			{
-				return this._PN2013;
-			}
-			set
-			{
-				if ((this._PN2013 != value))
-				{
-					this.OnPN2013Changing(value);
-					this.SendPropertyChanging();
-					this._PN2013 = value;
-					this.SendPropertyChanged("PN2013");
-					this.OnPN2013Changed();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postal2013", DbType="Bit", UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<bool> Postal2013
 		{
@@ -822,46 +706,6 @@ namespace Canvasser
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNs2012", DbType="smallint", UpdateCheck=UpdateCheck.Never)]
-		public short PNs2012
-		{
-			get
-			{
-				return this._PNs2012;
-			}
-			set
-			{
-				if ((this._PNs2012 != value))
-				{
-					this.OnPNs2012Changing(value);
-					this.SendPropertyChanging();
-					this._PNs2012 = value;
-					this.SendPropertyChanged("PNs2012");
-					this.OnPNs2012Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNs2013", DbType="smallint", UpdateCheck=UpdateCheck.Never)]
-		public short PNs2013
-		{
-			get
-			{
-				return this._PNs2013;
-			}
-			set
-			{
-				if ((this._PNs2013 != value))
-				{
-					this.OnPNs2013Changing(value);
-					this.SendPropertyChanging();
-					this._PNs2013 = value;
-					this.SendPropertyChanged("PNs2013");
-					this.OnPNs2013Changed();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="NVarChar(4000)")]
 		public string Notes
 		{
@@ -898,46 +742,6 @@ namespace Canvasser
 					this._Voted2013 = value;
 					this.SendPropertyChanged("Voted2013");
 					this.OnVoted2013Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PD2014", DbType="NVarChar(2)")]
-		public string PD2014
-		{
-			get
-			{
-				return this._PD2014;
-			}
-			set
-			{
-				if ((this._PD2014 != value))
-				{
-					this.OnPD2014Changing(value);
-					this.SendPropertyChanging();
-					this._PD2014 = value;
-					this.SendPropertyChanged("PD2014");
-					this.OnPD2014Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PN2014", DbType="smallint")]
-		public System.Nullable<short> PN2014
-		{
-			get
-			{
-				return this._PN2014;
-			}
-			set
-			{
-				if ((this._PN2014 != value))
-				{
-					this.OnPN2014Changing(value);
-					this.SendPropertyChanging();
-					this._PN2014 = value;
-					this.SendPropertyChanged("PN2014");
-					this.OnPN2014Changed();
 				}
 			}
 		}
@@ -982,26 +786,6 @@ namespace Canvasser
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNs2014", DbType="smallint")]
-		public System.Nullable<short> PNs2014
-		{
-			get
-			{
-				return this._PNs2014;
-			}
-			set
-			{
-				if ((this._PNs2014 != value))
-				{
-					this.OnPNs2014Changing(value);
-					this.SendPropertyChanging();
-					this._PNs2014 = value;
-					this.SendPropertyChanged("PNs2014");
-					this.OnPNs2014Changed();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address2", DbType="NVarChar(100)", CanBeNull=false)]
 		public string Address2
 		{
@@ -1038,66 +822,6 @@ namespace Canvasser
 					this._Voted2014 = value;
 					this.SendPropertyChanged("Voted2014");
 					this.OnVoted2014Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PD2015", DbType="NVarChar(2)")]
-		public string PD2015
-		{
-			get
-			{
-				return this._PD2015;
-			}
-			set
-			{
-				if ((this._PD2015 != value))
-				{
-					this.OnPD2015Changing(value);
-					this.SendPropertyChanging();
-					this._PD2015 = value;
-					this.SendPropertyChanged("PD2015");
-					this.OnPD2015Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PN2015", DbType="smallint")]
-		public System.Nullable<short> PN2015
-		{
-			get
-			{
-				return this._PN2015;
-			}
-			set
-			{
-				if ((this._PN2015 != value))
-				{
-					this.OnPN2015Changing(value);
-					this.SendPropertyChanging();
-					this._PN2015 = value;
-					this.SendPropertyChanged("PN2015");
-					this.OnPN2015Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNs2015", DbType="smallint")]
-		public System.Nullable<short> PNs2015
-		{
-			get
-			{
-				return this._PNs2015;
-			}
-			set
-			{
-				if ((this._PNs2015 != value))
-				{
-					this.OnPNs2015Changing(value);
-					this.SendPropertyChanging();
-					this._PNs2015 = value;
-					this.SendPropertyChanged("PNs2015");
-					this.OnPNs2015Changed();
 				}
 			}
 		}
@@ -1218,6 +942,66 @@ namespace Canvasser
 					this._PNs = value;
 					this.SendPropertyChanged("PNs");
 					this.OnPNsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PDPrevious", DbType="NVarChar(2)")]
+		public string PDPrevious
+		{
+			get
+			{
+				return this._PDPrevious;
+			}
+			set
+			{
+				if ((this._PDPrevious != value))
+				{
+					this.OnPDPreviousChanging(value);
+					this.SendPropertyChanging();
+					this._PDPrevious = value;
+					this.SendPropertyChanged("PDPrevious");
+					this.OnPDPreviousChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNPrevious", DbType="smallint")]
+		public System.Nullable<short> PNPrevious
+		{
+			get
+			{
+				return this._PNPrevious;
+			}
+			set
+			{
+				if ((this._PNPrevious != value))
+				{
+					this.OnPNPreviousChanging(value);
+					this.SendPropertyChanging();
+					this._PNPrevious = value;
+					this.SendPropertyChanged("PNPrevious");
+					this.OnPNPreviousChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PNsPrevious", DbType="smallint")]
+		public System.Nullable<short> PNsPrevious
+		{
+			get
+			{
+				return this._PNsPrevious;
+			}
+			set
+			{
+				if ((this._PNsPrevious != value))
+				{
+					this.OnPNsPreviousChanging(value);
+					this.SendPropertyChanging();
+					this._PNsPrevious = value;
+					this.SendPropertyChanged("PNsPrevious");
+					this.OnPNsPreviousChanged();
 				}
 			}
 		}

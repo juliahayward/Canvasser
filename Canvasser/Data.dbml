@@ -16,8 +16,6 @@
   </Table>
   <Table Name="Elector" Member="Electors">
     <Type Name="Elector">
-      <Column Name="PD2012" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="PN2012" Type="System.Int16" DbType="smallint" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="FirstName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Surname" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" UpdateCheck="Never" />
@@ -26,31 +24,24 @@
       <Column Name="Date" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ElectorId" Type="System.Int32" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Voted2012" Type="System.Boolean" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="PD2013" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="PN2013" Type="System.Int16" DbType="smallint" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Postal2013" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Intention2013" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Markers" Type="System.String" DbType="NVarChar(4)" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="PNs2012" Type="System.Int16" DbType="smallint" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="PNs2013" Type="System.Int16" DbType="smallint" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Notes" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
       <Column Name="Voted2013" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="PD2014" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="PN2014" Type="System.Int16" DbType="smallint" CanBeNull="true" />
       <Column Name="Postal2014" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Intention2014" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
-      <Column Name="PNs2014" Type="System.Int16" DbType="smallint" CanBeNull="true" />
       <Column Name="Address2" Type="System.String" DbType="NVarChar(100)" CanBeNull="false" />
       <Column Name="Voted2014" Type="System.Boolean" DbType="bit" CanBeNull="true" />
-      <Column Name="PD2015" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
-      <Column Name="PN2015" Type="System.Int16" DbType="smallint" CanBeNull="true" />
-      <Column Name="PNs2015" Type="System.Int16" DbType="smallint" CanBeNull="true" />
       <Column Name="Postal2015" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Intention2015" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
       <Column Name="Telephone" Type="System.String" DbType="NVarChar(12)" CanBeNull="true"/>
       <Column Name="PD" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
       <Column Name="PN" Type="System.Int16" DbType="smallint" CanBeNull="true" />
       <Column Name="PNs" Type="System.Int16" DbType="smallint" CanBeNull="true" />
+	  <Column Name="PDPrevious" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="PNPrevious" Type="System.Int16" DbType="smallint" CanBeNull="true" />
+      <Column Name="PNsPrevious" Type="System.Int16" DbType="smallint" CanBeNull="true" />
       <Column Name="Voted2015" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Voted2015Bye" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Postal2016" Type="System.Boolean" DbType="bit" CanBeNull="true" />
