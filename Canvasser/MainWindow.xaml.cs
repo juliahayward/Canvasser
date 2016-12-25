@@ -69,6 +69,8 @@ namespace Canvasser
 
                 InitializeComponent();
 
+                PopulatePDFilter();
+
                 _logger = new TrelloLogger("**REDACTEDTrelloKey**",
                     "**REDACTEDTrelloAuthKey**");
                 App.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
@@ -119,6 +121,17 @@ namespace Canvasser
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
+        }
+
+        private void PopulatePDFilter()
+        {
+            bool isFirst = true;
+            foreach (var pd in _context.PollingDistricts)
+            {
+                pdFilterComboBox.Items.Add(new ComboBoxItem() { Content = pd.PD + " (" + pd.ShortName + ")", Tag = pd.PD });
+                kuPDFilter.Items.Add(new ComboBoxItem() { Content = pd.PD + " (" + pd.ShortName + ")", Tag = pd.PD, IsSelected = isFirst });
+                isFirst = false;
             }
         }
 

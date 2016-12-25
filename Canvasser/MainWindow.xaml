@@ -117,19 +117,10 @@
                             <Border Margin="4,4,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
                                 <TextBlock Width="132" TextAlignment="Center">Filters</TextBlock>
                             </Border>
-                            <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="pdFilter_SelectionChanged">
+                            <ComboBox x:Name="pdFilterComboBox" Margin="0,4,0,0" Width="132" SelectionChanged="pdFilter_SelectionChanged">
                                 <ComboBox.Items>
                                     <ComboBoxItem Tag="" IsSelected="True">All polling districts</ComboBoxItem>
-                                    <ComboBoxItem Tag="ER">ER (Jubilee)</ComboBoxItem>
-                                    <ComboBoxItem Tag="ES">ES (Bushmead)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EN">EN (Scout Hut)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EP">EP (Eatons Ctr)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EF">EF (Methodists)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EG">EG (Wintringham Rd)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EH">EH (Ernulf)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EJ">EJ (Town/North, Almond Road)</ComboBoxItem>
-                                    <ComboBoxItem Tag="EL">EL (The Birds, Almond Road)</ComboBoxItem>
-                                    <ComboBoxItem Tag="ET">ET (Loves Farm)</ComboBoxItem>
+                                    <!-- Other items get inserted by PopulatePDFilter() -->
                                 </ComboBox.Items>
                             </ComboBox>
                             <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="voteFilter_SelectionChanged">
@@ -238,18 +229,9 @@
                 </TabItem>
                 <TabItem Header="Polling Day">
                     <StackPanel Orientation="Vertical">
-                        <ComboBox Margin="0,4,0,0" Width="160"  SelectionChanged="kuDayFilter_SelectionChanged">
+                        <ComboBox x:Name="kuPDFilter" Margin="0,4,0,0" Width="160"  SelectionChanged="kuDayFilter_SelectionChanged">
                             <ComboBox.Items>
-                                <ComboBoxItem Tag="ER" IsSelected="True">ER (Jubilee)</ComboBoxItem>
-                                <ComboBoxItem Tag="ES">ES (Bushmead)</ComboBoxItem>
-                                <ComboBoxItem Tag="EN">EN (Scout Hut)</ComboBoxItem>
-                                <ComboBoxItem Tag="EP">EP (Eatons Ctr)</ComboBoxItem>
-                                <ComboBoxItem Tag="EF">EF (Methodists)</ComboBoxItem>
-                                <ComboBoxItem Tag="EG">EG (Wintringham Rd)</ComboBoxItem>
-                                <ComboBoxItem Tag="EH">EH (Ernulf)</ComboBoxItem>
-                                <ComboBoxItem Tag="EJ">EJ (Town/North, Almond Road)</ComboBoxItem>
-                                <ComboBoxItem Tag="EL">EL (The Birds, Almond Road)</ComboBoxItem>
-                                <ComboBoxItem Tag="ET">ET (Loves Farm)</ComboBoxItem>
+                                <!-- Items added by PopulatePDFilter() -->
                             </ComboBox.Items>
                         </ComboBox>
                         <StackPanel Orientation="Horizontal">
