@@ -127,9 +127,8 @@
     <Compile Include="Schema\HDC2016RegisterImporter.cs" />
     <Compile Include="Schema\ExcelHDCRegisterReader.cs" />
     <Compile Include="Schema\ExcelNumberReader.cs" />
-    <Compile Include="Schema\VotedIn2015ByeImporter.cs" />
     <Compile Include="Schema\SchemaUpdater.cs" />
-    <Compile Include="Schema\VotedIn2015Importer.cs" />
+    <Compile Include="Schema\VotedInLastElectionImporter.cs" />
     <Compile Include="StatisticsVM.cs" />
     <Compile Include="VotedToForegroundConverter.cs" />
     <Page Include="MainWindow.xaml">
@@ -187,7 +186,7 @@
     <Content Include="InstallNewCanvasser.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
+    <None Include="Images\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -41,8 +41,6 @@ namespace Canvasser.Schema
                     elector.PD = entry.PD;
                     elector.PN = entry.PN;
                     elector.PNs = entry.PNs;
-                    elector.Intention2016 = "";
-                    elector.Postal2016 = elector.Postal2015;
                     elector.Date = "";
                     elector.Markers = entry.Markers;
                     elector.FirstName = entry.Forename;
@@ -70,16 +68,25 @@ namespace Canvasser.Schema
                         Intention2014 = "",
                         Intention2015 = "", 
                         Intention2016 = "",
+                        Intention2017 = "",
+                        Intention2018 = "",
+                        Intention2019 = "",
                         Postal2012 = false,
                         Postal2013 = false,
                         Postal2014 = false,
                         Postal2015 = false,
                         Postal2016 = false,
+                        Postal2017 = false,
+                        Postal2018 = false,
+                        Postal2019 = false,
                         Voted2012 = false,
                         Voted2013 = false,
                         Voted2014 = false,
                         Voted2015 = false,
-                        Voted2015Bye = false
+                        Voted2015Bye = false,
+                        Voted2016 = false,
+                        Voted2017 = false,
+                        Voted2018 = false
                     };
                     _context.Electors.InsertOnSubmit(elector);
                     newEntry++;

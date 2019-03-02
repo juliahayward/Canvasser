@@ -21,19 +21,37 @@ namespace Canvasser
             }
         }
 
+        public bool VotedInLastElection
+        {
+            get { return Voted2018.HasValue && Voted2018.Value; }
+            set { Voted2018 = value; }
+        }
+
+        public bool PostalInLastElection
+        {
+            get { return Postal2018.HasValue && Postal2018.Value; }
+            set { Postal2018 = value; }
+        }
+
+        public bool PostalInNextElection
+        {
+            get { return Postal2019.HasValue && Postal2019.Value; }
+            set { Postal2019 = value; }
+        }
+
         public bool Selected { get; set; }
 
         public string Annotations
         {
             get
             {
-                return "14: " + Intention2014
-                    + ((Voted2014.HasValue && Voted2014.Value) ? " (v)" : "")
-                    + ((Postal2014.HasValue && Postal2014.Value) ? " (post)" : "")
+                return "17: " + Intention2017
+                    + ((Voted2017.HasValue && Voted2017.Value) ? " (v)" : "")
+                    + ((Postal2017.HasValue && Postal2017.Value) ? " (post)" : "")
                     + Environment.NewLine 
-                    + "15: " + Intention2015
-                    + ((Voted2015.HasValue && Voted2015.Value) ? " (v)" : "")
-                    + ((Postal2015.HasValue && Postal2015.Value) ? " (post)" : "");
+                    + "18: " + Intention2018
+                    + ((Voted2018.HasValue && Voted2018.Value) ? " (v)" : "")
+                    + ((Postal2018.HasValue && Postal2018.Value) ? " (post)" : "");
             }
         }
 
@@ -41,6 +59,8 @@ namespace Canvasser
         {
             get
             {
+                if (!string.IsNullOrEmpty(Intention2018)) return Intention2018;
+                if (!string.IsNullOrEmpty(Intention2017)) return Intention2017;
                 if (!string.IsNullOrEmpty(Intention2016)) return Intention2016;
                 if (!string.IsNullOrEmpty(Intention2015)) return Intention2015;
                 if (!string.IsNullOrEmpty(Intention2014)) return Intention2014;
@@ -89,6 +109,29 @@ namespace Canvasser
             }
         }
 
+        public SolidColorBrush PartyColour2016
+        {
+            get
+            {
+                return PartyColours(Intention2016);
+            }
+        }
+
+        public SolidColorBrush PartyColour2017
+        {
+            get
+            {
+                return PartyColours(Intention2017);
+            }
+        }
+
+        public SolidColorBrush PartyColour2018
+        {
+            get
+            {
+                return PartyColours(Intention2018);
+            }
+        }
 
 
         private SolidColorBrush PartyColours(string intention)

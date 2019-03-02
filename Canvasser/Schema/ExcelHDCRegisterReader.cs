@@ -37,13 +37,14 @@ namespace Canvasser.Schema
             var result = new List<RegisterEntry>();
 
             FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+            IExcelDataReader excelReader;
 
             //Choose one of either 1 or 2
             //1. Reading from a binary Excel file ('97-2003 format; *.xls)
-            //IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
-
+            //  excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+            
             //2. Reading from a OpenXml Excel file (2007 format; *.xlsx)
-            IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+            excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
             //Choose one of either 3, 4, or 5
             //3. DataSet - The result of each spreadsheet will be created in the result.Tables
@@ -84,15 +85,15 @@ namespace Canvasser.Schema
                     PNs = excelReader.GetInt16(2),
                     Markers = excelReader.GetString(3),
                     DoB = dob,
-                    Surname = excelReader.GetString(5),
-                    Forename = excelReader.GetString(6),
-                    Postcode = excelReader.GetString(7),
-                    Address1 = excelReader.GetString(8),
-                    Address2 = excelReader.GetString(9),
-                    Address3 = excelReader.GetString(10),
-                    Address4 = excelReader.GetString(11),
-                    Address5 = excelReader.GetString(12),
-                    Address6 = excelReader.GetString(13)
+                    Surname = excelReader.GetString(5).Split(',')[0].Trim(),
+                    Forename = excelReader.GetString(5).Split(',')[1].Trim(),
+                    Postcode = excelReader.GetString(6),
+                    Address1 = excelReader.GetString(7),
+                    Address2 = excelReader.GetString(8),
+                    Address3 = excelReader.GetString(9),
+                    Address4 = excelReader.GetString(10),
+                    Address5 = excelReader.GetString(11),
+                    Address6 = excelReader.GetString(12)
                 });
             }
 

@@ -33,7 +33,7 @@ namespace Canvasser
             this.ignoreEvents = true;
             this.dataDC = context;
 
-            var pdCodes = context.PollingDistricts.Select(x => x.PD).OrderBy(x => x);
+            var pdCodes = context.PollingDistricts.OrderBy(x => x.DisplayOrder).Select(x => x.PD);
 
             // Cannot add multiple items to ObservableCollection in single step :-(
             foreach (var pd in pdCodes)

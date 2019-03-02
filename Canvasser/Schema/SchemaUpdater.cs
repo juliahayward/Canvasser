@@ -25,7 +25,20 @@ namespace Canvasser.Schema
             if (currentVersion < 6) UpgradeTo6();
             if (currentVersion < 7) UpgradeTo7();
             if (currentVersion < 8) UpgradeTo8();
-            SetVersion(8);
+            if (currentVersion < 9) UpgradeTo9();
+            if (currentVersion < 10) UpgradeTo10();
+            if (currentVersion < 11) UpgradeTo11();
+            if (currentVersion < 12) UpgradeTo12();
+            if (currentVersion < 12) UpgradeTo13();
+            if (currentVersion < 14) UpgradeTo14();
+            if (currentVersion < 15) UpgradeTo15();
+            if (currentVersion < 16) UpgradeTo16();
+            if (currentVersion < 17) UpgradeTo17();
+            if (currentVersion < 18) UpgradeTo18();
+            if (currentVersion < 19) UpgradeTo19();
+            if (currentVersion < 20) UpgradeTo20();
+            if (currentVersion < 21) UpgradeTo21();
+            SetVersion(21);
         }
 
         public int GetVersion()
@@ -115,25 +128,25 @@ ImprintAddress NVARCHAR(100) NOT NULL
 )";
             _context.ExecuteCommand(sql);
 
-            sql = @"INSERT INTO PollingDistrict VALUES ('ER', 'Jubilee', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('ER', 'Jubilee', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('ES', 'Bushmead', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('ES', 'Bushmead', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EN', 'Scout Hut', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EN', 'Scout Hut', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EP', 'Eatons Ctr', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EP', 'Eatons Ctr', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EF', 'Methodists', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EF', 'Methodists', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EG', 'Wintringham', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EG', 'Wintringham', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EH', 'Ernulf', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EH', 'Ernulf', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EJ', 'Almond Road', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EJ', 'Almond Road', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('EL', 'Almond Road', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('EL', 'Almond Road', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
-            sql = @"INSERT INTO PollingDistrict VALUES ('ET', 'Loves Farm', 'Derek Giles', '6 Stratford Place, Eaton Socon PE19 8HY')";
+            sql = @"INSERT INTO PollingDistrict VALUES ('ET', 'Loves Farm', '(redacted name)', '(redacted address)')";
             _context.ExecuteCommand(sql);
 
         }
@@ -174,6 +187,158 @@ ImprintAddress NVARCHAR(100) NOT NULL
             }
         }
 
+        private void UpgradeTo9()
+        {
+            foreach (var sql in new[] {
+                 @"ALTER TABLE PollingDistrict ADD DisplayOrder SMALLINT NULL",
+
+                 @"UPDATE PollingDistrict SET DisplayOrder = 1 WHERE PD = 'ER'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 2 WHERE PD = 'ES'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 3 WHERE PD = 'EN'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 4 WHERE PD = 'EP'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 5 WHERE PD = 'EF'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 6 WHERE PD = 'EG'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 7 WHERE PD = 'EH'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 8 WHERE PD = 'EJ'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 9 WHERE PD = 'EL'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 10 WHERE PD = 'ET'",
+            })
+            {
+                _context.ExecuteCommand(sql);
+            }
+        }
+
+        // Add the 2017 columns
+        private void UpgradeTo10()
+        {
+            var sql = @"ALTER TABLE Elector ADD Postal2017 BIT";
+            _context.ExecuteCommand(sql);
+            sql = @"ALTER TABLE Elector ADD Voted2016 BIT";
+            _context.ExecuteCommand(sql);
+            sql = @"ALTER TABLE Elector ADD Intention2017 NVarChar(16)";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Postal2017 = Postal2016 WHERE Postal2016 IS NOT NULL";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Postal2017 = 0 WHERE Postal2016 IS NULL";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Voted2016 = 0";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Intention2017 = ''";
+            _context.ExecuteCommand(sql);
+        }
+
+        // Copy across the PNs
+        private void UpgradeTo11()
+        {
+            var sql = @"UPDATE Elector SET PNPrevious = PN, PDPrevious = PD, PNsPrevious = PNs";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET PD = '', PN = 0, PNs = 0";
+            _context.ExecuteCommand(sql);
+        }
+
+        // do 11 right this time
+        private void UpgradeTo12()
+        {
+            var sql = @"UPDATE Elector SET PD = NULL, PN = NULL, PNs = NULL";
+            _context.ExecuteCommand(sql);
+        }
+
+        // New polling districts for 2018
+        private void UpgradeTo13()
+        {
+            foreach (var sql in new[] {
+                 
+                @"INSERT INTO PollingDistrict VALUES ('EQ', 'Scout Hut', '(redacted name)', '(redacted address)', 5)",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 6 WHERE PD = 'EF'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 7 WHERE PD = 'EG'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 8 WHERE PD = 'EH'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 9 WHERE PD = 'EJ'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 10 WHERE PD = 'EL'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 11 WHERE PD = 'ET'",
+            })
+            {
+                _context.ExecuteCommand(sql);
+            }
+        }
+
+        private void UpgradeTo14()
+        {
+            var sql = @"ALTER TABLE Elector ADD Postal2018 BIT";
+            _context.ExecuteCommand(sql);
+            sql = @"ALTER TABLE Elector ADD Voted2017 BIT";
+            _context.ExecuteCommand(sql);
+            sql = @"ALTER TABLE Elector ADD Intention2018 NVarChar(16)";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Postal2018 = Postal2017";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Voted2017 = 0";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Intention2018 = ''";
+            _context.ExecuteCommand(sql);
+        }
+
+        // Copy across the PNs
+        private void UpgradeTo15()
+        {
+            var sql = @"UPDATE Elector SET PNPrevious = PN, PDPrevious = PD, PNsPrevious = PNs";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET PD = NULL, PN = NULL, PNs = NULL";
+            _context.ExecuteCommand(sql);
+        }
+
+        private void UpgradeTo16()
+        {
+            foreach (var sql in new[] {               
+                @"UPDATE Elector SET Voted2016 = 0 WHERE Voted2016 IS NULL",
+                @"UPDATE Elector SET Voted2017 = 0 WHERE Voted2017 IS NULL",
+                @"UPDATE Elector SET Postal2017 = 0 WHERE Postal2017 IS NULL",
+                @"UPDATE Elector SET Postal2018 = 0 WHERE Postal2018 IS NULL",
+            })
+            {
+                _context.ExecuteCommand(sql);
+            }
+        }
+
+        private void UpgradeTo17()
+        {
+            foreach (var sql in new[] { 
+                 @"INSERT INTO PollingDistrict VALUES ('EQ', 'Scout Hut', '(redacted name)', '(redacted address)', 5)",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 6 WHERE PD = 'EF'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 7 WHERE PD = 'EG'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 8 WHERE PD = 'EH'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 9 WHERE PD = 'EJ'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 10 WHERE PD = 'EL'",
+                 @"UPDATE PollingDistrict SET DisplayOrder = 11 WHERE PD = 'ET'",
+                 @"INSERT INTO PollingDistrict VALUES ('EW', 'Town', '(redacted name)', '(redacted address)', 12)"
+            })
+            {
+                _context.ExecuteCommand(sql);
+            }
+        }
+
+        private void UpgradeTo18()
+        {
+            foreach (var sql in new[] {
+                 @"INSERT INTO PollingDistrict VALUES ('DF', 'L/Paxton', '(redacted name)', '(redacted address)', 13)",
+            })
+            {
+                _context.ExecuteCommand(sql);
+            }
+        }
+
+        private void UpgradeTo19()
+        {
+            foreach (var sql in new[] { 
+                 @"UPDATE Elector SET Postal2018 = 0 where Postal2018 IS NULL",
+            })
+            {
+                _context.ExecuteCommand(sql);
+            }
+        }
+
+
+        // Once you've done this, import the 2017 data...
+
         private void AddPhoneFieldIfNotPresent()
         {
             var sql = @"ALTER TABLE Elector ADD Telephone NVARCHAR(12)";
@@ -193,6 +358,35 @@ ImprintAddress NVARCHAR(100) NOT NULL
                 _context.SubmitChanges();
             }
             catch (Exception) { /* Discard once done on Derek's box*/ }
+        }
+
+        private void UpgradeTo20()
+        {
+            // Add the 2019 columns
+
+            var sql = @"ALTER TABLE Elector ADD Postal2019 BIT";
+            _context.ExecuteCommand(sql);
+            sql = @"ALTER TABLE Elector ADD Voted2018 BIT";
+            _context.ExecuteCommand(sql);
+            sql = @"ALTER TABLE Elector ADD Intention2019 NVarChar(16)";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Postal2019 = Postal2018";
+            _context.ExecuteCommand(sql);
+            // If they had a postal in 2018, assume they used it
+            sql = @"UPDATE Elector SET Voted2018 = Postal2018";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET Intention2019 = ''";
+            _context.ExecuteCommand(sql);
+        }
+
+        private void UpgradeTo21()
+        {
+            // Copy the PNs backwards
+
+            var sql = @"UPDATE Elector SET PNPrevious = PN, PDPrevious = PD, PNsPrevious = PNs";
+            _context.ExecuteCommand(sql);
+            sql = @"UPDATE Elector SET PD = NULL, PN = NULL, PNs = NULL";
+            _context.ExecuteCommand(sql);
         }
     }
 }

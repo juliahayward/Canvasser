@@ -225,6 +225,8 @@ namespace Canvasser
 		
 		private string _ImprintAddress;
 		
+		private System.Nullable<short> _DisplayOrder;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -237,6 +239,8 @@ namespace Canvasser
     partial void OnImprintNameChanged();
     partial void OnImprintAddressChanging(string value);
     partial void OnImprintAddressChanged();
+    partial void OnDisplayOrderChanging(System.Nullable<short> value);
+    partial void OnDisplayOrderChanged();
     #endregion
 		
 		public PollingDistrict()
@@ -320,6 +324,26 @@ namespace Canvasser
 					this._ImprintAddress = value;
 					this.SendPropertyChanged("ImprintAddress");
 					this.OnImprintAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisplayOrder", DbType="smallint")]
+		public System.Nullable<short> DisplayOrder
+		{
+			get
+			{
+				return this._DisplayOrder;
+			}
+			set
+			{
+				if ((this._DisplayOrder != value))
+				{
+					this.OnDisplayOrderChanging(value);
+					this.SendPropertyChanging();
+					this._DisplayOrder = value;
+					this.SendPropertyChanged("DisplayOrder");
+					this.OnDisplayOrderChanged();
 				}
 			}
 		}
@@ -411,7 +435,25 @@ namespace Canvasser
 		
 		private string _Intention2016;
 		
-		private string _Postcode;
+		private System.Nullable<bool> _Voted2016;
+		
+		private System.Nullable<bool> _Postal2017;
+		
+		private string _Intention2017;
+		
+		private System.Nullable<bool> _Voted2017;
+		
+		private System.Nullable<bool> _Postal2018;
+		
+		private string _Intention2018;
+
+        private System.Nullable<bool> _Voted2018;
+
+        private System.Nullable<bool> _Postal2019;
+
+        private string _Intention2019;
+
+        private string _Postcode;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -477,7 +519,25 @@ namespace Canvasser
     partial void OnPostal2016Changed();
     partial void OnIntention2016Changing(string value);
     partial void OnIntention2016Changed();
-    partial void OnPostcodeChanging(string value);
+    partial void OnVoted2016Changing(System.Nullable<bool> value);
+    partial void OnVoted2016Changed();
+    partial void OnPostal2017Changing(System.Nullable<bool> value);
+    partial void OnPostal2017Changed();
+    partial void OnIntention2017Changing(string value);
+    partial void OnIntention2017Changed();
+    partial void OnVoted2017Changing(System.Nullable<bool> value);
+    partial void OnVoted2017Changed();
+    partial void OnPostal2018Changing(System.Nullable<bool> value);
+    partial void OnPostal2018Changed();
+    partial void OnIntention2018Changing(string value);
+    partial void OnIntention2018Changed();
+        partial void OnVoted2018Changing(System.Nullable<bool> value);
+        partial void OnVoted2018Changed();
+        partial void OnPostal2019Changing(System.Nullable<bool> value);
+        partial void OnPostal2019Changed();
+        partial void OnIntention2019Changing(string value);
+        partial void OnIntention2019Changed();
+        partial void OnPostcodeChanging(string value);
     partial void OnPostcodeChanged();
     #endregion
 		
@@ -1086,7 +1146,187 @@ namespace Canvasser
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="NVarChar(8)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voted2016", DbType="bit")]
+		public System.Nullable<bool> Voted2016
+		{
+			get
+			{
+				return this._Voted2016;
+			}
+			set
+			{
+				if ((this._Voted2016 != value))
+				{
+					this.OnVoted2016Changing(value);
+					this.SendPropertyChanging();
+					this._Voted2016 = value;
+					this.SendPropertyChanged("Voted2016");
+					this.OnVoted2016Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postal2017", DbType="bit")]
+		public System.Nullable<bool> Postal2017
+		{
+			get
+			{
+				return this._Postal2017;
+			}
+			set
+			{
+				if ((this._Postal2017 != value))
+				{
+					this.OnPostal2017Changing(value);
+					this.SendPropertyChanging();
+					this._Postal2017 = value;
+					this.SendPropertyChanged("Postal2017");
+					this.OnPostal2017Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Intention2017", DbType="NVarChar(16)")]
+		public string Intention2017
+		{
+			get
+			{
+				return this._Intention2017;
+			}
+			set
+			{
+				if ((this._Intention2017 != value))
+				{
+					this.OnIntention2017Changing(value);
+					this.SendPropertyChanging();
+					this._Intention2017 = value;
+					this.SendPropertyChanged("Intention2017");
+					this.OnIntention2017Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Voted2017", DbType="bit")]
+		public System.Nullable<bool> Voted2017
+		{
+			get
+			{
+				return this._Voted2017;
+			}
+			set
+			{
+				if ((this._Voted2017 != value))
+				{
+					this.OnVoted2017Changing(value);
+					this.SendPropertyChanging();
+					this._Voted2017 = value;
+					this.SendPropertyChanged("Voted2017");
+					this.OnVoted2017Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postal2018", DbType="bit")]
+		public System.Nullable<bool> Postal2018
+		{
+			get
+			{
+				return this._Postal2018;
+			}
+			set
+			{
+				if ((this._Postal2018 != value))
+				{
+					this.OnPostal2018Changing(value);
+					this.SendPropertyChanging();
+					this._Postal2018 = value;
+					this.SendPropertyChanged("Postal2018");
+					this.OnPostal2018Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Intention2018", DbType="NVarChar(16)")]
+		public string Intention2018
+		{
+			get
+			{
+				return this._Intention2018;
+			}
+			set
+			{
+				if ((this._Intention2018 != value))
+				{
+					this.OnIntention2018Changing(value);
+					this.SendPropertyChanging();
+					this._Intention2018 = value;
+					this.SendPropertyChanged("Intention2018");
+					this.OnIntention2018Changed();
+				}
+			}
+		}
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Voted2018", DbType = "bit")]
+        public System.Nullable<bool> Voted2018
+        {
+            get
+            {
+                return this._Voted2018;
+            }
+            set
+            {
+                if ((this._Voted2018 != value))
+                {
+                    this.OnVoted2018Changing(value);
+                    this.SendPropertyChanging();
+                    this._Voted2018 = value;
+                    this.SendPropertyChanged("Voted2018");
+                    this.OnVoted2018Changed();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Postal2019", DbType = "bit")]
+        public System.Nullable<bool> Postal2019
+        {
+            get
+            {
+                return this._Postal2019;
+            }
+            set
+            {
+                if ((this._Postal2019 != value))
+                {
+                    this.OnPostal2019Changing(value);
+                    this.SendPropertyChanging();
+                    this._Postal2019 = value;
+                    this.SendPropertyChanged("Postal2019");
+                    this.OnPostal2019Changed();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage = "_Intention2019", DbType = "NVarChar(16)")]
+        public string Intention2019
+        {
+            get
+            {
+                return this._Intention2019;
+            }
+            set
+            {
+                if ((this._Intention2019 != value))
+                {
+                    this.OnIntention2019Changing(value);
+                    this.SendPropertyChanging();
+                    this._Intention2019 = value;
+                    this.SendPropertyChanged("Intention2019");
+                    this.OnIntention2019Changed();
+                }
+            }
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Postcode", DbType="NVarChar(8)")]
 		public string Postcode
 		{
 			get

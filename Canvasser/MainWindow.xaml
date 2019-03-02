@@ -11,8 +11,23 @@
         <Grid.Resources>
             <local:VotedToForegroundConverter x:Key="VotedToForegroundConverter" />
         </Grid.Resources>
-        <StackPanel Orientation="Vertical">
-        <TabControl HorizontalAlignment="Left" Margin="12,12,0,0" Name="tabControl1" VerticalAlignment="Top" Height="530" Width="984" SelectionChanged="tabControl1_SelectionChanged">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Data">
+                    <MenuItem Header="Import list who voted in last election" Click="importMostRecentVoted_Click" />
+                    <MenuItem Header="Import list who had Postal Votes in last election" Click="importMostRecentPostals_Click" />
+                    <MenuItem Header="Import new Register" Click="importNewRegister_Click" />
+                    <Separator />
+                    <MenuItem Header="Send Data File back" Click="sendDataHome_Click" />
+                </MenuItem>
+                <MenuItem Header="Help" Click="help_Click" />
+            </Menu>
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="status">Ready</TextBlock>
+                </StatusBarItem>
+            </StatusBar>
+            <TabControl HorizontalAlignment="Left" Margin="12,12,0,0" Name="tabControl1" VerticalAlignment="Top" Height="530" Width="984" SelectionChanged="tabControl1_SelectionChanged">
             <TabItem Header="Electors">
                 <StackPanel Orientation="Horizontal">
                         <DataGrid AutoGenerateColumns="False" Height="480" Width="824" HorizontalAlignment="Left" Margin="4,4,4,4" 
@@ -64,10 +79,34 @@
                                         </Style>
                                     </DataGridCheckBoxColumn.CellStyle>
                                 </DataGridCheckBoxColumn>
-                                <DataGridCheckBoxColumn Width="56" Header="Postal16" 
-                                                        Binding="{Binding Path=Postal2016, Mode=TwoWay}" />
-                                <DataGridComboBoxColumn Width="60" Header="2016"
-                                                        SelectedItemBinding="{Binding Path=Intention2016, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="16" 
+                                                        Binding="{Binding Path=Voted2016, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2016}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="17" 
+                                                        Binding="{Binding Path=Voted2017, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2017}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="32" IsReadOnly="True" Header="18" 
+                                                        Binding="{Binding Path=Voted2018, Mode=OneWay}">
+                                    <DataGridCheckBoxColumn.CellStyle>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Background" Value="{Binding Path=PartyColour2018}"/>
+                                        </Style>
+                                    </DataGridCheckBoxColumn.CellStyle>
+                                </DataGridCheckBoxColumn>
+                                <DataGridCheckBoxColumn Width="56" Header="Postal19" 
+                                                        Binding="{Binding Path=Postal2019, Mode=TwoWay}" />
+                                <DataGridComboBoxColumn Width="60" Header="2019"
+                                                        SelectedItemBinding="{Binding Path=Intention2019, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGridComboBoxColumn.ElementStyle>
                                         <Style TargetType="ComboBox">
                                             <Setter Property="ItemsSource" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Intentions}" />
@@ -130,13 +169,13 @@
                                     <ComboBoxItem Tag="Postal2016">Has Postal</ComboBoxItem>
                                     <ComboBoxItem Tag="NoPostal2016">NOT Postal</ComboBoxItem>
                                     <ComboBoxItem Tag="Both2015">Voted at p/s AND Postal</ComboBoxItem>
-                                    <ComboBoxItem Tag="New2016">New in 2016</ComboBoxItem>
+                                    <ComboBoxItem Tag="New2016">New in 2018</ComboBoxItem>
                                 </ComboBox.Items>
                             </ComboBox>
                             <ComboBox Margin="0,4,0,0" Width="132" SelectionChanged="intFilter_SelectionChanged">
                                 <ComboBox.Items>
                                     <ComboBoxItem Tag="" IsSelected="True">All intentions</ComboBoxItem>
-                                    <ComboBoxItem Tag="D,P">Derek</ComboBoxItem>
+                                    <ComboBoxItem Tag="D,P">SNIG</ComboBoxItem>
                                     <ComboBoxItem Tag="CON,Soft CON">Con</ComboBoxItem>
                                     <ComboBoxItem Tag="NOT:CON,Soft CON,ANTI,NV">NOT Con</ComboBoxItem>
                                     <ComboBoxItem Tag="LAB,Soft LAB">Lab</ComboBoxItem>
@@ -213,20 +252,6 @@
                         </StackPanel>
                     </StackPanel>
                 </TabItem>
-                <TabItem Header="Data">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" Width="144">
-                            <Border Margin="4,8,4,4" Background="AntiqueWhite" BorderBrush="Black" BorderThickness="1">
-                                <TextBlock Width="132" TextAlignment="Center" x:Name ="schemaVersionLabel" Text=""/>
-                            </Border>
-                            <Button Margin="4,4,4,4" Width="132" Click="upgrade_Click">Upgrade</Button>
-                            <Button Margin="4,4,4,4" Width="132" Click="import2015Voted_Click">Import 2015 Voted</Button>
-                            <Button Margin="4,4,4,4" Width="132" Click="import2015BVoted_Click">Import Bye Voted</Button>
-                            <Button Margin="4,4,4,4" Width="132" Click="importNewRegister_Click">Import new Register</Button>
-                            <Button Margin="4,4,4,4" Width="132" Click="sendDataHome_Click">Send Data Back</Button>
-                        </StackPanel>
-                    </StackPanel>
-                </TabItem>
                 <TabItem Header="Polling Day">
                     <StackPanel Orientation="Vertical">
                         <ComboBox x:Name="kuPDFilter" Margin="0,4,0,0" Width="160"  SelectionChanged="kuDayFilter_SelectionChanged">
@@ -284,16 +309,7 @@
                         </DataGrid>
                     </StackPanel>
                 </TabItem>
-                <TabItem Header="Help">
-                    <WebBrowser Width="964" Height="500" Source="http://apps.juliahayward.com/Canvasser/help.html">
-                    </WebBrowser>
-                </TabItem>
             </TabControl>
-            <StatusBar>
-                <StatusBarItem>
-                    <TextBlock x:Name="status">Ready</TextBlock>
-                </StatusBarItem>
-            </StatusBar>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

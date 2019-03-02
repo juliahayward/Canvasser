@@ -12,6 +12,7 @@
       <Column Name="ShortName" Type="System.String" DbType="NVarChar(16)" CanBeNull="false" />
       <Column Name="ImprintName" Type="System.String" DbType="NVarChar(100)" CanBeNull="false" />
       <Column Name="ImprintAddress" Type="System.String" DbType="NVarChar(100)" CanBeNull="false" />
+	  <Column Name="DisplayOrder" Type="System.Int16" DbType="smallint" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="Elector" Member="Electors">
@@ -46,6 +47,15 @@
       <Column Name="Voted2015Bye" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Postal2016" Type="System.Boolean" DbType="bit" CanBeNull="true" />
       <Column Name="Intention2016" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Voted2016" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+	    <Column Name="Postal2017" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+      <Column Name="Intention2017" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Voted2017" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+	    <Column Name="Postal2018" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+      <Column Name="Intention2018" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Voted2018" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+	    <Column Name="Postal2019" Type="System.Boolean" DbType="bit" CanBeNull="true" />
+      <Column Name="Intention2019" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
       <Column Name="Postcode" Type="System.String" DbType="NVarChar(8)" CanBeNull="true" />
     </Type>
   </Table>

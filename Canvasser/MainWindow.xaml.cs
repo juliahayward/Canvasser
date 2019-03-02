@@ -24,6 +24,8 @@ using Canvasser.Schema;
 using Microsoft.Win32;
 using JuliaHayward.Common.Environment;
 using AutoUpdaterForWPF;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Canvasser
 {
@@ -69,19 +71,18 @@ namespace Canvasser
 
                 InitializeComponent();
 
-                PopulatePDFilter();
-
                 _logger = new TrelloLogger("**REDACTEDTrelloKey**",
                     "**REDACTEDTrelloAuthKey**");
                 App.Current.DispatcherUnhandledException += Current_DispatcherUnhandledException;
 
-
-                if (!JuliaEnvironment.CurrentEnvironment.IsDebug())
+                //if (!JuliaEnvironment.CurrentEnvironment.IsDebug())
                 {
                     // If Derek's machine, upgrade automatically. Must be done *after*
                     // initialiseComponent so that we can update the UI
                     upgrade_Click(null, null);
                 }
+
+                PopulatePDFilter();
 
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 System.IO.FileInfo fileInfo = new System.IO.FileInfo(assembly.Location);
@@ -92,11 +93,6 @@ namespace Canvasser
                 _allPreds = (x =>
                 _pdPredicate(x) && _nationalityPredicate(x) && _partyPredicate(x)
                     && _votePredicate(x) && _searchPredicate(x));
-
-
-                var updater = new SchemaUpdater(_context);
-                _schemaVersion = updater.GetVersion();
-                schemaVersionLabel.Text = "Schema: v" + _schemaVersion;
 
                 dataGrid1.ItemsSource = new PartiesVM(_context);
 
@@ -127,7 +123,7 @@ namespace Canvasser
         private void PopulatePDFilter()
         {
             bool isFirst = true;
-            foreach (var pd in _context.PollingDistricts)
+            foreach (var pd in _context.PollingDistricts.OrderBy(x => x.DisplayOrder))
             {
                 pdFilterComboBox.Items.Add(new ComboBoxItem() { Content = pd.PD + " (" + pd.ShortName + ")", Tag = pd.PD });
                 kuPDFilter.Items.Add(new ComboBoxItem() { Content = pd.PD + " (" + pd.ShortName + ")", Tag = pd.PD, IsSelected = isFirst });
@@ -257,13 +253,13 @@ namespace Canvasser
             if (tag == "")
                 _votePredicate = (x => true);
             else if (tag == "Voted2015")
-                _votePredicate = (x => x.Voted2015.Value);
+                _votePredicate = (x => x.Voted2018.Value);
             else if (tag == "Postal2016")
-                _votePredicate = (x => x.Postal2016.Value);
+                _votePredicate = (x => x.Postal2019.Value);
             else if (tag == "NoPostal2016")
-                _votePredicate = (x => !x.Postal2016.Value);
+                _votePredicate = (x => !x.Postal2019.Value);
             else if (tag == "Both2015")
-                _votePredicate = (x => (x.Postal2015.Value || x.Voted2015.Value));
+                _votePredicate = (x => (x.Postal2019.Value || x.Voted2018.Value));
             else if (tag == "New2016")
                 _votePredicate = (x => string.IsNullOrEmpty(x.PDPrevious));
             dgElectors.ItemsSource = FilteredElectors;
@@ -544,8 +540,9 @@ namespace Canvasser
             Cursor = Cursors.Wait;
 
             // looks bad but basically context.SaveChanges()
-            _electorsVm.Save();
-            _isDirty = false;
+            //_electorsVm.Save();
+            //_isDirty = false;
+            // TODO This should save the PDs VM but I haven't done that yet
 
             Cursor = Cursors.Arrow;
         }
@@ -590,21 +587,21 @@ namespace Canvasser
             if (elector == null) return; 
 
             if (e.Key == Key.D)
-                elector.Intention2016 = "D";
+                elector.Intention2018 = "D";
             if (e.Key == Key.P)
-                elector.Intention2016 = "P";
+                elector.Intention2018 = "P";
             if (e.Key == Key.C)
-                elector.Intention2016 = "CON";
+                elector.Intention2018 = "CON";
             if (e.Key == Key.L)
-                elector.Intention2016 = "LAB";
+                elector.Intention2018 = "LAB";
             if (e.Key == Key.U)
-                elector.Intention2016 = "UKIP";
+                elector.Intention2018 = "UKIP";
             if (e.Key == Key.A)
-                elector.Intention2016 = "ANTI";
+                elector.Intention2018 = "ANTI";
             if (e.Key == Key.N)
-                elector.Intention2016 = "NV";
+                elector.Intention2018 = "NV";
             if (e.Key == Key.Back)
-                elector.Intention2016 = "";
+                elector.Intention2018 = "";
             _isDirty = true;
         }
 
@@ -612,14 +609,11 @@ namespace Canvasser
         {
             var updater = new SchemaUpdater(_context);
             updater.Update();
-            _schemaVersion = updater.GetVersion();
-            schemaVersionLabel.Text = "Schema: v" + _schemaVersion;
         }
 
-        private void import2015Voted_Click(object sender, RoutedEventArgs e)
+        private void importMostRecentVoted_Click(object sender, RoutedEventArgs e)
         {
-            // Important - this year Derek noted who DIDNT vote
-            var importer = new VotedIn2015Importer(_context, status);
+            var importer = new VotedInLastElectionImporter(_context, status);
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog().Value)
             {
@@ -630,9 +624,9 @@ namespace Canvasser
             }
         }
 
-        private void import2015BVoted_Click(object sender, RoutedEventArgs e)
+        private void importMostRecentPostals_Click(object sender, RoutedEventArgs e)
         {
-            var importer = new VotedIn2015ByeImporter(_context, status);
+            var importer = new PostalInLastElectionImporter(_context, status);
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog().Value)
             {
@@ -656,12 +650,12 @@ namespace Canvasser
                 (PD, PN, PNs, FirstName, Surname, Address, Address2, Telephone, Voted, Notes)
                 SELECT PD, PN, PNs, FirstName, Surname, Address, Address2, Telephone, 0, ''
                 FROM Elector
-                WHERE (Voted2012 = 1 OR Voted2013 = 1 OR Voted2014 = 1 OR Voted2015 = 1)
-                AND Postal2016 = 0
+                WHERE (Voted2012 = 1 OR Voted2013 = 1 OR Voted2014 = 1 OR Voted2015 = 1 OR Voted2016 = 1 OR Voted2017 = 1 OR Voted2018 = 1)
+                AND Postal2018 = 0
                 AND PD IS NOT NULL
                 AND (Intention2012 IN ('D','P') OR Intention2013 IN ('D','P') OR 
                     Intention2014 IN ('D','P') OR Intention2015 IN ('D','P')
-                    OR Intention2016 IN ('D','P'))";
+                    OR Intention2016 IN ('D','P') OR Intention2017 IN ('D','P') OR Intention2018 IN ('D','P')  OR Intention2019 IN ('D','P'))";
             _context.ExecuteCommand(sql);
 
             Model.TargetPD = "ER";
@@ -710,23 +704,35 @@ namespace Canvasser
             var userName = System.Environment.UserName;
             var date = DateTime.Now.ToString("yyyyMMdd_HHmmss");
             var newFileName = string.Format("{0}_{1}_Data.sdf", userName, date);
-            File.Copy("Data.sdf", newFileName);
-            ;
+            var path = System.IO.Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Julia");
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            path = System.IO.Path.Combine(path, newFileName);
+            File.Copy("Data.sdf", path);
 
             // Send it
             WebClient myWebClient = new WebClient();
             var uri = new Uri("**REDACTEDCanvasserTestUrl**");
-            byte[] response = myWebClient.UploadFile(uri, "POST", newFileName);
+            byte[] response = myWebClient.UploadFile(uri, "POST", path);
             if (response.Length == 0)
                 MessageBox.Show("Data successfully sent");
             else
                 MessageBox.Show(System.Text.Encoding.Default.GetString(response));
 
             // Get rid of the copy
-            File.Delete(newFileName);
+            File.Delete(path);
 
             this.status.Text = "Ready";
             Cursor = Cursors.Arrow;
         }
+
+        private void help_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("**REDACTEDCanvasserAutoUpdateUrl**/help.html");
+        }
+
+    
     }
 }

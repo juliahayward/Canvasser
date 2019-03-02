@@ -29,7 +29,7 @@ namespace Canvasser
                             .ThenBy(x => x.PN).ThenBy(x => x.PNs));
 
                 _districts = new ObservableRangeCollection<PollingDistrict>(
-                            _context.PollingDistricts.OrderBy(x => x.PD));
+                            _context.PollingDistricts.OrderBy(x => x.DisplayOrder));
             }
             catch (Exception)
             {
